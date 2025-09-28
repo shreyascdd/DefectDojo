@@ -1,0 +1,17 @@
+name: defect-dojo scan ingestion
+
+on:
+  workflow_run:
+    workflows: ["Build and Push - Deploy"]   # Must match the name: of Workflow A
+    types:
+      - completed
+
+jobs:
+  run-if-success:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow A succeeded. Running Workflow B..."
+	  
+	  
+	  
