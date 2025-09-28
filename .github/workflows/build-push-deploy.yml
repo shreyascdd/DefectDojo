@@ -1,12 +1,13 @@
 name: Build and Push - Deploy
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main   
 
 jobs:
-  build-and-push:
+  build-push-deploy:
     runs-on: ubuntu-latest
 
     steps:
