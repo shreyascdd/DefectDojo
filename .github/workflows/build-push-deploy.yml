@@ -3,7 +3,7 @@ name: Build and Push Docker Images
 on:
   push:
     branches:
-      - main   # adjust branch as needed
+      - main   
 
 jobs:
   build-and-push:
@@ -38,3 +38,8 @@ jobs:
           file: ./server/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/test-server:latest
+
+      - name: Deployment step
+        run: |
+          echo "Simulating deployment..."
+          echo "deploy successful ✅"
