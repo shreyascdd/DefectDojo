@@ -11,4 +11,54 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Workflow A succeeded. Running Workflow B..."
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ---------------------------
+      # 1. Trivy Scan
+      # ---------------------------
+      - name: Pull Docker image from Docker Hub
+        run: echo "pulled trivy, client, server docker image"
+
+      - name: Run Trivy scan on image
+        run: echo "trivy scan report saved as trivy-report.json"
+
+      - name: Upload Trivy results to DefectDojo
+        run: echo "curl"
+
+      
+      # ---------------------------
+      # 2. Gitleaks Scan
+      # ---------------------------
+      - name: Run Gitleaks with Docker
+        run: echo "downloaded gitleaks docker image and run scan"
+
+      - name: Upload Gitleaks results to DefectDojo
+        run: echo "curl"
+
+      # ---------------------------
+      # 3. ClamAV Scan
+      # ---------------------------
+      - name: Install ClamAV
+        run: sudo apt-get update && sudo apt-get install -y clamav
+
+      - name: Build project 
+        run: echo "project built in /build directory"
+
+      - name: Run ClamAV scan
+        run: echo "clamAV scan finished"
+
+      - name: Convert ClamAV results to SARIF
+        run: echo "clamAV logfile converted to SARIF format"
+
+      - name: Upload ClamAV results to DefectDojo
+        run: echo "curl"
+
+      # ---------------------------
+      # 4. OWASP ZAP Scan
+      # ---------------------------
+      - name: Run OWASP ZAP Baseline Scan
+        run: echo "ZAP scan file available"
+
+      - name: Upload ZAP results to DefectDojo
+        run: echo "curl"
